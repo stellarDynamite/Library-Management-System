@@ -25,4 +25,26 @@ CREATE TABLE Fine (
         REFERENCES Borrows(borrow_id)
 );
 
+CREATE DATABASE library_management_system;
+USE library_management_system;
+
+CREATE TABLE Publisher (
+    pub_id INT PRIMARY KEY,
+    pub_name VARCHAR(100) NOT NULL,
+    address VARCHAR(200)
+);
+
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    price DECIMAL(8,2),
+    available_copies INT,
+    pub_id INT,
+
+    FOREIGN KEY (pub_id)
+    REFERENCES Publisher(pub_id)
+);
+
+
 SHOW TABLES;
