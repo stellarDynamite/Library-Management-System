@@ -1,0 +1,69 @@
+Publisher(
+    pub_id PK,
+    pub_name,
+    address,
+    email,
+    phone
+)
+
+Author(
+    author_id PK,
+    author_name,
+    country
+)
+
+Category(
+    category_id PK,
+    category_name
+)
+
+Books(
+    book_id PK,
+    title,
+    isbn UNIQUE,
+    publication_year,
+    price,
+    available_copies,
+    pub_id FK → Publisher(pub_id),
+    category_id FK → Category(category_id)
+)
+
+Book_Author(
+    book_id PK, FK → Books(book_id),
+    author_id PK, FK → Author(author_id)
+)
+
+Member(
+    memb_id PK,
+    name,
+    email,
+    phone,
+    address,
+    memb_type,
+    join_date,
+    expiry_date
+)
+
+Librarian(
+    librarian_id PK,
+    librarian_name,
+    email,
+    phone
+)
+
+Borrows(
+    borrow_id PK,
+    memb_id FK → Member(memb_id),
+    book_id FK → Books(book_id),
+    librarian_id FK → Librarian(librarian_id),
+    issue_date,
+    due_date,
+    return_date
+)
+
+Fine(
+    fine_id PK,
+    borrow_id FK → Borrows(borrow_id),
+    amount,
+    status
+)
