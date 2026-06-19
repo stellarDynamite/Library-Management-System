@@ -45,6 +45,33 @@ CREATE TABLE Books (
     FOREIGN KEY (pub_id)
     REFERENCES Publisher(pub_id)
 );
+-- Created Member and Borrows tables to library database
+CREATE TABLE Member (
+    memb_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    address VARCHAR(200),
+    memb_type VARCHAR(30),
+    memb_date DATE,
+    expiry_date DATE
+);
+
+CREATE TABLE Borrows (
+    borrow_id INT PRIMARY KEY AUTO_INCREMENT,
+
+    memb_id INT,
+    book_id INT,
+
+    issue_date DATE,
+    due_date DATE,
+    return_date DATE,
+
+    FOREIGN KEY (memb_id)
+    REFERENCES Member(memb_id),
+
+    FOREIGN KEY (book_id)
+    REFERENCES Books(book_id)
+);
+
 
 CREATE TABLE Category (
     category_id INT PRIMARY KEY,
